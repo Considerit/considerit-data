@@ -20,8 +20,8 @@ if (continuous)
     setInterval(function () {
         refresh()
     }, 30 * 60 * 1000) // please keep this value respectful
-else
-    refresh()
+
+refresh()
 
 // Requests all the data we've specified from the considerit server
 function refresh() {
