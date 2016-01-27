@@ -1,0 +1,136 @@
+
+
+<script type="statebus"># -*- mode: coffee -*-
+
+dom.BODY = ->
+  subdomain = fetch '/subdomain'
+  proposals = fetch '/proposals'
+  
+  data_tables = ['opinions', 'proposals', 'users', 'points']
+  @local.active ||= 'opinions'
+
+  all_proposals = []
+  for k,v of proposals.clusters
+    all_proposals = all_proposals.concat v.proposals
+
+  switch @local.active 
+
+    when 'opinions'
+      all_opinions = []
+      for proposal in all_proposals
+        for opinion in proposal.opinions
+          all_opinions.push opinion
+
+      cols = ['key', 'created_at', 'updated_at', 'proposal', 'user', 'stance', 'point_inclusions']
+      # all cols: 
+      # cols = Object.keys all_opinions[0]
+      rows = all_opinions
+
+    when 'proposals'
+      cols = ['key', 'slug', 'cluster', 'name', 'created_at', 'updated_at', 'description', 'roles', 'user']
+      # all cols: 
+      # cols = Object.keys all_proposals[0]
+      rows = all_proposals
+
+    when 'users'
+      users = fetch '/users'
+      all_users = users.users
+
+      cols = ['key', 'name', 'tags']
+      # all cols: 
+      # cols = Object.keys all_users[0]      
+      rows = all_users
+
+    when 'points'
+      points = proposals.points 
+      cols = ['key', 'user', 'hide_name', 'proposal', 'created_at', 'is_pro', 'nutshell', 'text'] 
+      # all cols: 
+      # cols = Object.keys points[0]      
+      rows = points 
+
+  DIV 
+    style:
+      padding: 50
+      fontFamily: 'helvetica,calibri,sans-serif'
+
+    DIV 
+      style: 
+        fontSize: 36
+        marginBottom: 40
+
+      "Replicated data for #{subdomain.name}.consider.it"
+
+      DIV 
+        style: 
+          fontSize: 18
+        "Last refresh at #{new Date(fetch('/refreshed').refreshes[0])}"
+
+
+      DIV 
+        style: 
+          padding: 5
+          fontSize: 18
+
+
+        for t in data_tables
+          do (t) => 
+            SPAN 
+              style: 
+                padding: 5
+                textDecoration: 'underline'
+                color: if @local.active == t then 'orange'
+                cursor: 'pointer'
+              onClick: => 
+                @local.active = t
+                save @local
+              t 
+
+    DATATABLE
+      key: @local.active
+      name: @local.active
+      cols: cols
+      rows: rows
+
+
+
+dom.DATATABLE = -> 
+  td_style = 
+    padding: '3px 6px'
+    textAlign: 'left' 
+
+  DIV null,
+    DIV 
+      style: 
+        fontSize: 24
+        fontWeight: 'bold'
+        marginBottom: 12
+
+      @props.name
+
+    TABLE null,
+      TR null,
+        for k in @props.cols 
+          TH 
+            style: td_style
+            k
+
+      for row, idx in @props.rows
+        TR 
+          backgroundColor: if idx % 2 == 0 then '#eee'
+
+          for k in @props.cols
+            TD 
+              style: td_style
+
+              if k in ['created_at', 'updated_at']
+                "#{new Date(row[k])}"
+              else if typeof row[k] == 'object' && !(row[k] instanceof Array)
+                for k,v of row[k]
+                  DIV null,
+                    "#{k}: #{v}"
+              else 
+                "#{row[k]}"
+
+
+#</script><script src="https://dl.dropboxusercontent.com/u/1000932/libs/statebus-client.js"></script>
+<script>statebus_server = 'http://localhost:9375'</script>
