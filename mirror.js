@@ -1,6 +1,6 @@
 
 // The {subdomain}.consider.it whose data you want to replicate
-var subdomain = 'bitcoinclassic'
+var subdomain = process.argv[2] || 'bitcoinclassic'
 
 var bus = require('statebus-server')()
 var request = require('request')
@@ -8,7 +8,7 @@ var history = {}
 
 // Set to true if you want this node to poll the considerit server every 30 min
 // for new data
-var continuous = false
+var continuous = true
 
 // The data that we want to fetch from considerit
 keys = ['/proposals?all_points=true', '/subdomain', '/users']
