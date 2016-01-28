@@ -1,6 +1,6 @@
 # considerit-data
 
-Help us by running a node that mirrors and archives publicly accessible data behind any considerit subdomain! The goal is to have distributed data replication for auditing and visualization. All of the code used is open and inspectable.
+Gives anyone the ability to run a node that mirrors and archives publicly accessible data behind any considerit subdomain. The goal is to have distributed data replication for auditing, visualization, and accountability. All of the code used is open and inspectable.
 
 I'm running an example mirror at http://considering.it. 
 
