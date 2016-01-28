@@ -3,7 +3,7 @@
 Gives anyone the ability to run a node that mirrors and archives publicly accessible data behind any considerit subdomain. The goal is to have distributed data replication for auditing, visualization, and accountability. All of the code used is open and inspectable.
 
 Mirrors (make pull requests to add more):
-* http://considering.it. 
+* http://considering.it (mirrors bitcoinclassic.consider.it)
 
 ## Installation
 
