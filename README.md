@@ -10,9 +10,7 @@ Mirrors (make pull requests to add more):
 ```
 git clone https://github.com/invisible-college/considerit-data.git
 cd considerit-data
-echo '{}' > package.json
-npm install statebus-server --save
-npm install request --save
+npm install
 cp sample_mirror.js mirror.js
 ```
 
