@@ -2,7 +2,7 @@
 // The {subdomain}.consider.it whose data you want to replicate
 var subdomain = process.argv[2] || 'bitcoinclassic'
 
-var bus = require('statebus-server')()
+var bus = require('statebus/server')()
 var request = require('request')
 var history = {}
 
