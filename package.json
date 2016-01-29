@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "request": "^2.69.0",
-    "statebus": "^3.0.8"
+    "statebus": "^3.0.8",
+    "sockjs": "^0.3.15"
   }
 }
