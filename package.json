@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "request": "^2.69.0",
+    "statebus": "^3.0.4"
+  }
+}
