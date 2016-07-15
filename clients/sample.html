@@ -19,9 +19,10 @@ dom.BODY = ->
       all_opinions = []
       for proposal in all_proposals
         for opinion in proposal.opinions
+          opinion.proposal = proposal.key 
           all_opinions.push opinion
 
-      cols = ['key', 'created_at', 'updated_at', 'proposal', 'user', 'stance', 'point_inclusions']
+      cols = ['key', 'updated_at', 'proposal', 'user', 'stance', 'point_inclusions']
       # all cols: 
       # cols = Object.keys all_opinions[0]
       rows = all_opinions
